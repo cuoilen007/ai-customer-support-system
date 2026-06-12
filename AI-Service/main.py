@@ -1,0 +1,137 @@
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+from services.chroma_service import (
+    ChromaService
+)
+
+from services.rag_service import (
+    RagService
+)
+
+app = FastAPI(
+    title="AI Customer Support",
+    version="1.0"
+)
+
+
+# ===================================
+# Request Models
+# ===================================
+
+class InsertDocumentRequest(
+    BaseModel
+):
+    document_id: str
+    content: str
+
+
+class SearchRequest(
+    BaseModel
+):
+    question: str
+
+
+class RagRequest(
+    BaseModel
+):
+    question: str
+
+
+# ===================================
+# Health Check
+# ===================================
+
+@app.get("/")
+def home():
+
+    return {
+        "message":
+        "AI Service Running"
+    }
+
+
+@app.get("/health")
+def health():
+
+    return {
+        "status": "ok"
+    }
+
+
+# ===================================
+# Documents
+# ===================================
+
+@app.post("/documents")
+def insert_document(
+    request: InsertDocumentRequest
+):
+
+    ChromaService.add_document(
+        request.document_id,
+        request.content
+    )
+
+    return {
+        "success": True,
+        "message":
+        "Document inserted"
+    }
+
+
+@app.get("/documents")
+def get_documents():
+
+    return (
+        ChromaService
+        .get_all_documents()
+    )
+
+
+@app.delete(
+    "/documents/{document_id}"
+)
+def delete_document(
+    document_id: str
+):
+
+    ChromaService.delete_document(
+        document_id
+    )
+
+    return {
+        "success": True
+    }
+
+
+# ===================================
+# Semantic Search
+# ===================================
+
+@app.post("/search")
+def search(
+    request: SearchRequest
+):
+
+    result = (
+        ChromaService.search(
+            request.question
+        )
+    )
+
+    return result
+
+
+# ===================================
+# RAG
+# ===================================
+
+@app.post("/rag")
+def rag(
+    request: RagRequest
+):
+
+    return RagService.ask(
+        request.question
+    )
