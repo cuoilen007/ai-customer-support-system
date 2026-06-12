@@ -17,7 +17,7 @@ graph TD
     style FastAPI fill:#009688,stroke:#333,stroke-width:2px,color:#fff
     style OpenAI fill:#10a37f,stroke:#333,stroke-width:2px,color:#fff
     style ChromaDB fill:#e91e63,stroke:#333,stroke-width:2px,color:#fff
-
+```
 
 ## Features
 
