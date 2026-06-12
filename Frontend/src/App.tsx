@@ -14,6 +14,9 @@ from "./pages/ChatPage";
 import ProtectedRoute
 from "./routes/ProtectedRoute";
 
+import KnowledgeBasePage
+from "./pages/KnowledgeBasePage";
+
 export default function App(){
 
  return(
@@ -33,6 +36,13 @@ export default function App(){
  <ChatPage/>
 </ProtectedRoute>
  }
+/>
+
+<Route
+  path="/knowledge-base"
+  element={
+    <KnowledgeBasePage />
+  }
 />
 
 </Routes>

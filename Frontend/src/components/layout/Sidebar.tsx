@@ -1,5 +1,9 @@
 import ConversationList
 from "../chat/ConversationList";
+import {
+ Link
+}
+from "react-router-dom";
 
 interface Props {
 
@@ -45,6 +49,34 @@ export default function Sidebar({
           onSelectConversation
         }
       />
+
+      <div className="space-y-2">
+
+  <Link
+    to="/chat"
+    className="
+    block
+    p-3
+    rounded
+    hover:bg-slate-700
+    "
+  >
+    Conversations
+  </Link>
+
+  <Link
+    to="/knowledge-base"
+    className="
+    block
+    p-3
+    rounded
+    hover:bg-slate-700
+    "
+  >
+    Knowledge Base
+  </Link>
+
+</div>
 
     </div>
   );
