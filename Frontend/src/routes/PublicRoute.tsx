@@ -6,7 +6,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-export default function ProtectedRoute({
+export default function PublicRoute({
   children
 }: Props) {
 
@@ -15,10 +15,11 @@ export default function ProtectedRoute({
       "token"
     );
 
-  if (!token) {
+  if (token) {
+
     return (
       <Navigate
-        to="/login"
+        to="/chat"
         replace
       />
     );

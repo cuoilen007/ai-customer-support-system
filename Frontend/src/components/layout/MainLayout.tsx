@@ -1,21 +1,52 @@
-import Header from "./Header";
+import { Outlet }
+from "react-router-dom";
 
-interface Props {
-  children: React.ReactNode;
+import Sidebar
+from "./Sidebar";
+
+import {
+  useConversation
 }
+from "../../context/ConversationContext";
 
-export default function MainLayout({
-  children
-}: Props) {
+export default function
+MainLayout() {
+
+  const {
+
+    selectedConversation,
+
+    setSelectedConversation
+
+  } =
+    useConversation();
 
   return (
-    <div className="h-screen flex flex-col">
 
-      <Header />
+    <div
+      className="
+      flex
+      h-screen
+      "
+    >
 
-      <div className="flex-1 overflow-hidden">
-        {children}
-      </div>
+      <Sidebar
+        selectedConversation={
+          selectedConversation
+        }
+        onSelectConversation={
+          setSelectedConversation
+        }
+      />
+
+      <main
+        className="
+        flex-1
+        overflow-hidden
+        "
+      >
+        <Outlet />
+      </main>
 
     </div>
   );

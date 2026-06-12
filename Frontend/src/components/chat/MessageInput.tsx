@@ -69,66 +69,88 @@ MessageInput({
       }
     };
 
-  return (
+return (
+
+  <div
+    className="
+    border-t
+    bg-white
+    px-6
+    py-4
+    "
+  >
 
     <div
       className="
-      border-t
-      bg-white
-      p-4
+      flex
+      gap-3
+      items-end
       "
     >
 
-      <div
+      <textarea
+      className="
+      flex-1
+      border
+      border-slate-300
+      rounded-xl
+      px-4
+      py-3
+      resize-none
+
+      min-h-[52px]
+      max-h-[140px]
+
+      focus:outline-none
+      focus:ring-2
+      focus:ring-blue-500
+      "
+        rows={2}
+        value={text}
+        onChange={(e) =>
+          setText(
+            e.target.value
+          )
+        }
+        onKeyDown={
+          handleKeyDown
+        }
+        placeholder="
+        Type your message...
+        "
+        
+      />
+
+      <button
+        onClick={
+          handleSend
+        }
+        disabled={
+          loading
+        }
         className="
-        flex
-        gap-2
+        bg-blue-600
+        hover:bg-blue-700
+        text-white
+        px-6
+        py-3
+        rounded-xl
+        font-medium
+        transition
+
+        disabled:opacity-50
+        disabled:cursor-not-allowed
         "
       >
-
-        <textarea
-          rows={2}
-          value={text}
-          onChange={(e) =>
-            setText(
-              e.target.value
-            )
-          }
-          onKeyDown={
-            handleKeyDown
-          }
-          className="
-          flex-1
-          border
-          rounded
-          p-3
-          resize-none
-          "
-        />
-
-        <button
-          onClick={
-            handleSend
-          }
-          disabled={
-            loading
-          }
-          className="
-          bg-blue-500
-          text-white
-          px-6
-          rounded
-          "
-        >
-          {
-            loading
-              ? "..."
-              : "Send"
-          }
-        </button>
-
-      </div>
+        {
+          loading
+            ? "..."
+            : "Send"
+        }
+      </button>
 
     </div>
-  );
+
+  </div>
+);
 }

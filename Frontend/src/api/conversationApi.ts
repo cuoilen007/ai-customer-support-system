@@ -18,3 +18,12 @@ export const createConversation =
     }
   );
 };
+
+
+export const deleteConversation =
+  (id: number) =>
+{
+  return axiosClient.delete(
+    `/conversation/${id}`
+  );
+};

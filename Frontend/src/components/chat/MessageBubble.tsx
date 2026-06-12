@@ -15,7 +15,8 @@ export default function MessageBubble({
 
     <div
       className={`
-      flex mb-4
+      flex
+      mb-6
 
       ${
         isUser
@@ -27,27 +28,28 @@ export default function MessageBubble({
 
       <div
         className={`
-        max-w-[75%]
-        px-4
-        py-3
-        rounded-lg
-        shadow
+        max-w-[70%]
 
         ${
           isUser
-            ? "bg-blue-500 text-white"
-            : "bg-white border text-gray-800"
+            ? "order-2"
+            : ""
         }
         `}
       >
 
         <div
-          className="
+          className={`
           text-xs
           mb-1
-          font-semibold
-          opacity-70
-          "
+          px-1
+
+          ${
+            isUser
+              ? "text-right text-slate-500"
+              : "text-slate-500"
+          }
+          `}
         >
           {
             isUser
@@ -57,10 +59,30 @@ export default function MessageBubble({
         </div>
 
         <div
-          className="
+          className={`
+          px-4
+          py-3
+          rounded-2xl
+          shadow-sm
           whitespace-pre-wrap
           break-words
-          "
+
+          ${
+            isUser
+              ? `
+                bg-blue-600
+                text-white
+                rounded-br-md
+              `
+              : `
+                bg-white
+                text-slate-800
+                border
+                border-slate-200
+                rounded-bl-md
+              `
+          }
+          `}
         >
           {content}
         </div>

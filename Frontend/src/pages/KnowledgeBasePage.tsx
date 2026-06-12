@@ -3,9 +3,6 @@ import {
   useState
 } from "react";
 
-import MainLayout
-from "../components/layout/MainLayout";
-
 import DocumentForm
 from "../components/document/DocumentForm";
 
@@ -16,8 +13,7 @@ import {
   createDocument,
   deleteDocument,
   getDocuments
-}
-from "../api/documentApi";
+} from "../api/documentApi";
 
 export default function
 KnowledgeBasePage() {
@@ -34,12 +30,22 @@ KnowledgeBasePage() {
   const loadDocuments =
     async () => {
 
-      const res =
-        await getDocuments();
+      try {
 
-      setDocuments(
-        res.data
-      );
+        const res =
+          await getDocuments();
+
+        setDocuments(
+          res.data
+        );
+
+      } catch (error) {
+
+        console.error(
+          error
+        );
+
+      }
     };
 
   const handleCreate =
@@ -70,25 +76,57 @@ KnowledgeBasePage() {
 
   return (
 
-    <MainLayout>
+    <div
+      className="
+      h-full
+      overflow-auto
+      bg-slate-100
+      "
+    >
+
+      {/* Header */}
 
       <div
         className="
-        max-w-6xl
-        mx-auto
-        p-6
+        bg-white
+        border-b
+        px-8
+        py-5
+        shadow-sm
         "
       >
 
         <h1
           className="
-          text-3xl
+          text-2xl
           font-bold
-          mb-6
+          text-slate-800
           "
         >
           Knowledge Base
         </h1>
+
+        <p
+          className="
+          text-sm
+          text-slate-500
+          mt-1
+          "
+        >
+          Manage documents used by the AI assistant
+        </p>
+
+      </div>
+
+      {/* Content */}
+
+      <div
+        className="
+        max-w-6xl
+        mx-auto
+        p-8
+        "
+      >
 
         <DocumentForm
           onCreate={
@@ -96,17 +134,22 @@ KnowledgeBasePage() {
           }
         />
 
-        <DocumentList
-          documents={
-            documents
-          }
-          onDelete={
-            handleDelete
-          }
-        />
+        <div className="mt-8">
+
+          <DocumentList
+            documents={
+              documents
+            }
+            onDelete={
+              handleDelete
+            }
+          />
+
+        </div>
 
       </div>
 
-    </MainLayout>
+    </div>
+
   );
 }

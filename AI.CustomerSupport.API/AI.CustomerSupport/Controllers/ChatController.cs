@@ -44,22 +44,38 @@ namespace AI.CustomerSupport.API.Controllers
                 return Forbid();
             }
 
+
+            var answer = await _aiService.AskAsync(request.Message);
+
+            var category = await _aiService
+                    .ClassifyAsync(request.Message);
+
             var userMessage =
                 new Message
                 {
                     ConversationId = request.ConversationId,
                     Role = "user",
                     Content = request.Message,
-                    CreatedAt = DateTime.UtcNow
+                    CreatedAt = DateTime.UtcNow,
+                    Category = category
                 };
 
             _context.Messages.Add(userMessage);
 
             await _context.SaveChangesAsync();
 
-            var answer =
-                await _aiService
-                .AskAsync(request.Message);
+            if (conversation.Title == "New Conversation")
+                {
+                    conversation.Title =
+                        request.Message.Length > 40
+                            ? request.Message.Substring(
+                                0,
+                                40
+                              )
+                            : request.Message;
+
+                    await _context.SaveChangesAsync();
+                }
 
             var assistantMessage =
                 new Message

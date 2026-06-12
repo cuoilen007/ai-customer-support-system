@@ -14,6 +14,8 @@
 
         public DateTime CreatedAt { get; set; }
 
+        public string Category { get; set; } = string.Empty;
+
 
     }
 }

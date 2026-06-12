@@ -2,6 +2,7 @@
 using AI.CustomerSupport.API.DTOs.Conversation;
 using AI.CustomerSupport.API.Helpers;
 using AI.CustomerSupport.API.Models;
+using AI.CustomerSupport.API.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,11 +16,13 @@ namespace AI.CustomerSupport.API.Controllers
     public class ConversationController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IConversationService _conversationService;
 
         public ConversationController(
-            AppDbContext context)
+            AppDbContext context, IConversationService conversationService)
         {
             _context = context;
+            _conversationService = conversationService;
         }
 
         [HttpPost]
@@ -32,7 +35,7 @@ namespace AI.CustomerSupport.API.Controllers
                 new Conversation
                 {
                     UserId = userId,
-                    Title = request.Title,
+                    Title = "New Conversation",
                     CreatedAt = DateTime.UtcNow
                 };
 
@@ -62,6 +65,47 @@ namespace AI.CustomerSupport.API.Controllers
                     .ToListAsync();
 
             return Ok(conversations);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var conversation =
+       await _context.Conversations
+           .FirstOrDefaultAsync(
+               x => x.Id == id
+           );
+
+            if (conversation == null)
+            {
+                throw new Exception(
+                    "Conversation not found"
+                );
+            }
+
+            _context.Conversations.Remove(
+                conversation
+            );
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpPut("{id}/title")]
+        public async Task<IActionResult>
+UpdateTitle(
+    int id,
+    UpdateConversationTitleRequest request
+)
+        {
+            await _conversationService
+                .UpdateTitleAsync(
+                    id,
+                    request.Title 
+                );
+
+            return Ok();
         }
     }
 }

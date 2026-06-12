@@ -19,6 +19,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddScoped<IOpenAIService, OpenAIService>();
+builder.Services.AddScoped<IConversationService, ConversationService>();
 
 builder.Services.AddAuthentication(
         JwtBearerDefaults.AuthenticationScheme)

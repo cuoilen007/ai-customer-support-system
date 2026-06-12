@@ -1,4 +1,5 @@
-﻿using AI.CustomerSupport.API.DTOs.AI;
+﻿using AI.CustomerSupport.API.DTOs;
+using AI.CustomerSupport.API.DTOs.AI;
 using AI.CustomerSupport.API.Services.Interfaces;
 
 namespace AI.CustomerSupport.API.Services
@@ -77,6 +78,23 @@ namespace AI.CustomerSupport.API.Services
             {
                 return false;
             }
+        }
+
+        public async Task<string> ClassifyAsync(string text)
+        {
+            var response =
+                await _httpClient
+                .PostAsJsonAsync(
+                    "/classify",
+                    new
+                    {
+                        text
+                    });
+
+            var result =  await response.Content
+                         .ReadFromJsonAsync<ClassificationResponse>();
+
+            return result!.Category;
         }
     }
 }

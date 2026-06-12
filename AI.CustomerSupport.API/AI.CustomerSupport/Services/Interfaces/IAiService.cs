@@ -17,5 +17,9 @@ namespace AI.CustomerSupport.API.Services.Interfaces
 
 
         Task<bool> IsAiAliveAsync();
+
+        Task<string> ClassifyAsync(
+            string text
+        );
     }
 }

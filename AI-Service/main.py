@@ -9,6 +9,10 @@ from services.rag_service import (
     RagService
 )
 
+from classifier import (
+    predict_category
+)
+
 app = FastAPI(
     title="AI Customer Support",
     version="1.0"
@@ -36,6 +40,11 @@ class RagRequest(
     BaseModel
 ):
     question: str
+
+class ClassificationRequest(
+    BaseModel
+):
+    text: str
 
 
 # ===================================
@@ -135,3 +144,25 @@ def rag(
     return RagService.ask(
         request.question
     )
+
+
+# ===================================
+# Classification
+# ===================================
+@app.post(
+    "/classify"
+)
+def classify(
+    request:
+    ClassificationRequest
+):
+    category = (
+        predict_category(
+            request.text
+        )
+    )
+
+    return {
+        "category":
+        category
+    }

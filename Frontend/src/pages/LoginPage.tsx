@@ -29,7 +29,12 @@ export default function LoginPage() {
                 res.data.token
             );
 
-            window.location.href = "/";
+            localStorage.setItem(
+                "email",
+                email
+            );
+
+            window.location.href = "/chat";
         };
 
     return (

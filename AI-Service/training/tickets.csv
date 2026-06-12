@@ -1,0 +1,261 @@
+text,category
+I want a refund,Refund
+Refund my order,Refund
+Can I get my money back,Refund
+I need a refund for my last purchase,Refund
+Please cancel my order and refund the money,Refund
+The item arrived damaged and I want a refund,Refund
+I am very unsatisfied and demand a full refund,Refund
+How can I request a refund for this service,Refund
+Money back please,Refund
+The product is defective I want my money back,Refund
+Please return my money to my credit card,Refund
+I accidentally bought the wrong item please refund,Refund
+Can I return this and get a refund,Refund
+I was promised a refund but haven't received it,Refund
+Where is my refund for order 12345,Refund
+Cancel this subscription and refund me,Refund
+The app doesn't work as advertised I want a refund,Refund
+I want to return this product and get my money back,Refund
+Please process my refund request as soon as possible,Refund
+Is it possible to get a refund after 14 days,Refund
+I changed my mind can I get a refund,Refund
+The service was terrible I want a partial refund at least,Refund
+Refund required for failed delivery,Refund
+I need to request a cancellation and refund,Refund
+Please credit my account back,Refund
+My refund status is still pending please check,Refund
+I want a refund because the price dropped right after I bought it,Refund
+This is a duplicate purchase please refund one of them,Refund
+I did not authorize this charge please refund immediately,Refund
+Where can I fill the refund form,Refund
+Please send my money back to my PayPal,Refund
+I am eligible for a refund according to your policy,Refund
+The quality is poor I need a full refund,Refund
+I want my cash back for this transaction,Refund
+Can you reverse this payment and refund me,Refund
+I want to claim my money-back guarantee,Refund
+Refund my payment immediately,Refund
+I want a refund for the unused subscription period,Refund
+Please help me get a refund for this broken item,Refund
+I want to return the package and get a refund,Refund
+I received the wrong item please refund my money,Refund
+The item did not match the description I want a refund,Refund
+Can I get a refund if the package is lost,Refund
+I want to terminate my account and get a refund,Refund
+Please check my refund request number 9876,Refund
+I haven't used the service at all I request a refund,Refund
+Give me my money back right now,Refund
+The transaction failed but money was deducted please refund,Refund
+I want a refund for the tickets I bought,Refund
+Please initiate a refund process for my account,Refund
+I want to request a refund for the shipping fee,Refund
+Can you process a refund for this accidental renewal,Refund
+I am not happy with the update I want a refund,Refund
+Please issue a refund for this double payment,Refund
+I want a refund for the order that was canceled by the seller,Refund
+Is my refund processed yet,Refund
+I would like to know the status of my refund,Refund
+Please refund the balance to my bank account,Refund
+I want a refund for the course I enrolled in,Refund
+I need a refund because the event was canceled,Refund
+Where is my package,Shipping
+My order has not arrived,Shipping
+Track my shipment,Shipping
+Where is my delivery,Shipping
+I haven't received my order yet,Shipping
+Can you check my shipping status,Shipping
+When will my package arrive,Shipping
+My shipment is delayed,Shipping
+Please provide a tracking number,Shipping
+The tracking link is not working,Shipping
+Where is my order being shipped from,Shipping
+My package is stuck at the transit center,Shipping
+Can I change my delivery address,Shipping
+The courier didn't show up today,Shipping
+Is there an express shipping option,Shipping
+My package was marked as delivered but I don't have it,Shipping
+How long does international shipping take,Shipping
+Can I schedule a specific delivery time,Shipping
+The shipping fee is too high,Shipping
+My delivery address is incorrect please update it,Shipping
+Which courier service are you using,Shipping
+I need to track my order urgently,Shipping
+The tracking status has not changed for 5 days,Shipping
+Can I pick up my package from your warehouse,Shipping
+Why is my shipment taking so long,Shipping
+My parcel seems to be lost in transit,Shipping
+Please expedite my shipping if possible,Shipping
+I received a notification that my shipping is delayed,Shipping
+The shipping company says my address is incomplete,Shipping
+Can you resend the tracking information,Shipping
+Do you ship to my country,Shipping
+My package is held at customs,Shipping
+Is signature required for delivery,Shipping
+I need to cancel the shipment,Shipping
+The package was delivered to the wrong address,Shipping
+Can I change the shipping method after ordering,Shipping
+When will my pre-order be shipped,Shipping
+I was charged for shipping but it was supposed to be free,Shipping
+The tracking details say returned to sender why,Shipping
+Please check the location of my parcel,Shipping
+I need an update on my delivery status,Shipping
+Why is my package departing from a different city,Shipping
+Can you ask the driver to call me before delivery,Shipping
+The estimated delivery date has passed,Shipping
+I am missing one item from my shipped package,Shipping
+Is there any tracking update for my order,Shipping
+How can I trace my shipped order,Shipping
+My delivery is way overdue,Shipping
+The box arrived damaged during shipping,Shipping
+Please hold my delivery until next Monday,Shipping
+I cannot login,Technical
+The application crashes,Technical
+Password reset not working,Technical
+I forgot my password and cannot log in,Technical
+The website is loading very slowly,Technical
+I am getting a 500 internal server error,Technical
+The login button is not responding,Technical
+My account has been locked out,Technical
+The software freezes when I open it,Technical
+I cannot upload my profile picture,Technical
+The system keeps logging me out automatically,Technical
+I am not receiving the verification email,Technical
+The mobile app keeps crashing on startup,Technical
+An error occurred while saving my data,Technical
+The dashboard is not displaying any information,Technical
+I am experiencing a bug in the settings menu,Technical
+The link you sent me is broken,Technical
+I cannot connect my account to Google,Technical
+The page is completely blank,Technical
+I am seeing an invalid token error,Technical
+The system is throwing a database connection error,Technical
+The authentication code is expired too fast,Technical
+My data is not syncing across devices,Technical
+The update failed to install on my computer,Technical
+I cannot access the premium features after upgrading,Technical
+The API endpoints are returning 404 errors,Technical
+I found a security vulnerability in the system,Technical
+The search bar is not working properly,Technical
+The video player is not loading the content,Technical
+The screen goes black when I click submit,Technical
+I cannot download the report file,Technical
+The captcha verification is failing repeatedly,Technical
+My session keeps timing out every two minutes,Technical
+The plug-in is incompatible with my browser,Technical
+The system is running very laggy today,Technical
+I am unable to change my email in settings,Technical
+The server response time is too high,Technical
+I keep getting kicked out of the chat room,Technical
+The application is throwing an unhandled exception,Technical
+The fonts and layout are completely broken on mobile,Technical
+I cannot configure my webhook settings,Technical
+The SSL certificate seems to be invalid,Technical
+I am unable to reset my security questions,Technical
+The file format is not supported error appears,Technical
+The notifications are not working on my device,Technical
+I am getting a permission denied error message,Technical
+The backend is not receiving my requests,Technical
+The app uses too much RAM and crashes,Technical
+I cannot generate the API keys,Technical
+The multi-factor authentication is failing,Technical
+Payment failed,Billing
+I was charged twice,Billing
+Invoice issue,Billing
+My credit card was declined,Billing
+Why is there an extra fee on my bill,Billing
+I need a copy of my tax invoice,Billing
+Please update my billing information,Billing
+I want to change my payment method,Billing
+Can I get a receipt for my last payment,Billing
+My subscription renewed automatically without notice,Billing
+I was charged the wrong amount this month,Billing
+Can I pay using PayPal instead of a credit card,Billing
+I need to update my credit card expiration date,Billing
+Why is my account still showing unpaid,Billing
+I want to switch from monthly to annual billing,Billing
+There is an unknown charge from you on my bank statement,Billing
+Please remove my payment details from the system,Billing
+I didn't receive the invoice for this month,Billing
+Can you split this payment into two cards,Billing
+My coupon code was not applied to the bill,Billing
+Why was I charged during the free trial period,Billing
+I need to add my company VAT number to the invoice,Billing
+The payment gateway is throwing an error code,Billing
+When will my next billing cycle start,Billing
+I want to cancel the auto-renewal feature,Billing
+Please check why my automatic payment failed,Billing
+I received a billing alert but my card has funds,Billing
+Can I get an extension on my payment due date,Billing
+The price on the invoice doesn't match the checkout price,Billing
+I am being billed for a canceled service,Billing
+How do I download all my past invoices,Billing
+My account is suspended due to a billing issue please help,Billing
+Please change the billing email address,Billing
+I was charged for a premium plan but I am on basic,Billing
+Can I pay via bank wire transfer,Billing
+The currency on my bill is incorrect,Billing
+I need a breakdown of the service charges,Billing
+Why is my discount not showing on the bill,Billing
+I need a formal quotation before making a payment,Billing
+Please update the billing address on my account,Billing
+The payment went through but I didn't get confirmation,Billing
+I want to dispute a charge on my account,Billing
+Can I get a refund for the overcharged amount,Billing
+My payment is stuck in processing status,Billing
+Why am I being charged taxes on this order,Billing
+I want to remove my secondary payment method,Billing
+Please verify if my payment was received,Billing
+I received a double invoice for the same month,Billing
+How can I update my billing country,Billing
+I need help setting up direct debit,Billing
+Hello,General
+Thank you,General
+Good morning,General
+Hi there,General
+Good afternoon,General
+Good evening,General
+How are you today,General
+Can you help me,General
+I have a general question,General
+Thanks for your support,General
+Have a great day,General
+Hello team,General
+Just checking in,General
+Hi,General
+Greetings,General
+I appreciate your help,General
+Thank you very much,General
+Hope you are doing well,General
+Is anyone available to chat,General
+Can I ask something,General
+Awesome service thanks,General
+Thanks a lot,General
+Hello customer support,General
+Good day,General
+Hi quick question here,General
+Thank you for the quick response,General
+Much appreciated,General
+Hey there,General
+Just wanted to say thanks,General
+I need some information,General
+Can someone assist me please,General
+Hello there,General
+Many thanks for your assistance,General
+Have a nice weekend,General
+Hi support team,General
+Thanks for the update,General
+Hello can you hear me,General
+I'm looking for some guidance,General
+Thank you for solving my issue,General
+Great job thanks,General
+Hi I have a small query,General
+Hello please help,General
+Thanks again,General
+Good morning team,General
+Hi there how's it going,General
+Thank you for being so helpful,General
+I am grateful for your support,General
+Hello good afternoon,General
+Thanks a million,General
+Yo,General

@@ -1,53 +1,92 @@
 import {
- BrowserRouter,
- Routes,
- Route
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate
+} from "react-router-dom";
+
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+
+import ChatPage from "./pages/ChatPage";
+import KnowledgeBasePage from "./pages/KnowledgeBasePage";
+
+import ProtectedRoute from "./routes/ProtectedRoute";
+import PublicRoute from "./routes/PublicRoute";
+
+import MainLayout from "./components/layout/MainLayout";
+
+function App() {
+
+  return (
+
+    <BrowserRouter>
+
+      <Routes>
+
+        <Route
+          path="/"
+          element={
+            <Navigate
+              to="/chat"
+              replace
+            />
+          }
+        />
+
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <LoginPage />
+            </PublicRoute>
+          }
+        />
+
+        <Route
+          path="/register"
+          element={
+            <PublicRoute>
+              <RegisterPage />
+            </PublicRoute>
+          }
+        />
+
+        <Route
+          element={
+            <ProtectedRoute>
+              <MainLayout />
+            </ProtectedRoute>
+          }
+        >
+
+          <Route
+            path="/chat"
+            element={<ChatPage />}
+          />
+
+          <Route
+            path="/knowledge-base"
+            element={<KnowledgeBasePage />}
+          />
+
+        </Route>
+
+        <Route
+          path="*"
+          element={
+            <Navigate
+              to="/chat"
+              replace
+            />
+          }
+        />
+
+      </Routes>
+
+    </BrowserRouter>
+
+  );
 }
-from "react-router-dom";
 
-import LoginPage
-from "./pages/LoginPage";
-
-import ChatPage
-from "./pages/ChatPage";
-
-import ProtectedRoute
-from "./routes/ProtectedRoute";
-
-import KnowledgeBasePage
-from "./pages/KnowledgeBasePage";
-
-export default function App(){
-
- return(
-
-<BrowserRouter>
-
-<Routes>
-
-<Route
- path="/login"
- element={<LoginPage/>}/>
-
-<Route
- path="/"
- element={
-<ProtectedRoute>
- <ChatPage/>
-</ProtectedRoute>
- }
-/>
-
-<Route
-  path="/knowledge-base"
-  element={
-    <KnowledgeBasePage />
-  }
-/>
-
-</Routes>
-
-</BrowserRouter>
-
- );
-}
+export default App;

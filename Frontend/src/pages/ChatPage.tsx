@@ -1,38 +1,26 @@
-import { useState } from "react";
+import ChatWindow
+from "../components/chat/ChatWindow";
 
-import MainLayout from "../components/layout/MainLayout";
-import Sidebar from "../components/layout/Sidebar";
-import ChatWindow from "../components/chat/ChatWindow";
+import {
+  useConversation
+}
+from "../context/ConversationContext";
 
-export default function ChatPage() {
+export default function
+ChatPage() {
 
-  const [
-    selectedConversation,
-    setSelectedConversation
-  ] = useState<number | null>(null);
+  const {
+    selectedConversation
+  } =
+    useConversation();
 
   return (
-    <MainLayout>
 
-      <div className="flex h-full">
+    <ChatWindow
+      conversationId={
+        selectedConversation
+      }
+    />
 
-        <Sidebar
-          selectedConversation={
-            selectedConversation
-          }
-          onSelectConversation={
-            setSelectedConversation
-          }
-        />
-
-        <ChatWindow
-          conversationId={
-            selectedConversation
-          }
-        />
-
-      </div>
-
-    </MainLayout>
   );
 }
