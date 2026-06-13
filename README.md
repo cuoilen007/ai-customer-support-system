@@ -146,7 +146,6 @@ AI-Service/                       FastAPI AI service + ChromaDB + training pipel
 ### Knowledge base management
 ![Knowledge base management](docs/screenshots/knowledge-base.png)
 
-Tip: use screenshots with real seeded data so the reviewer immediately sees products, policies, review groups, analytics, and training history in action.
 
 ## AI workflow
 
