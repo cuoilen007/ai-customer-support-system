@@ -42,7 +42,8 @@ MainLayout() {
       <main
         className="
         flex-1
-        overflow-hidden
+        min-w-0
+        overflow-y-auto
         "
       >
         <Outlet />

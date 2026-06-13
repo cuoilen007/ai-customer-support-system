@@ -7,5 +7,8 @@
 
         public string Context { get; set; }
             = string.Empty;
+
+        public List<RagSourceResponse> Sources { get; set; }
+            = new();
     }
 }

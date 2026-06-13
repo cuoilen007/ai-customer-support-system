@@ -1,3 +1,4 @@
+using AI.CustomerSupport.API.Configurations;
 using AI.CustomerSupport.API.Data;
 using AI.CustomerSupport.API.Services;
 using AI.CustomerSupport.API.Services.Interfaces;
@@ -8,13 +9,31 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var aiServiceOptions = builder.Configuration
+    .GetSection(AiServiceOptions.SectionName)
+    .Get<AiServiceOptions>() ?? new AiServiceOptions();
+
+var corsOptions = builder.Configuration
+    .GetSection(AppCorsOptions.SectionName)
+    .Get<AppCorsOptions>() ?? new AppCorsOptions();
+
+var databaseOptions = builder.Configuration
+    .GetSection(DatabaseStartupOptions.SectionName)
+    .Get<DatabaseStartupOptions>() ?? new DatabaseStartupOptions();
+
+builder.Services.Configure<AiServiceOptions>(
+    builder.Configuration.GetSection(AiServiceOptions.SectionName));
+builder.Services.Configure<AppCorsOptions>(
+    builder.Configuration.GetSection(AppCorsOptions.SectionName));
+builder.Services.Configure<DatabaseStartupOptions>(
+    builder.Configuration.GetSection(DatabaseStartupOptions.SectionName));
+
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-// Add services to the container.
 builder.Services.AddControllers();
 
 builder.Services.AddScoped<IJwtService, JwtService>();
@@ -32,13 +51,8 @@ builder.Services.AddAuthentication(
                 ValidateAudience = true,
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
-
-                ValidIssuer =
-                    builder.Configuration["Jwt:Issuer"],
-
-                ValidAudience =
-                    builder.Configuration["Jwt:Audience"],
-
+                ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                ValidAudience = builder.Configuration["Jwt:Audience"],
                 IssuerSigningKey =
                     new SymmetricSecurityKey(
                         Encoding.UTF8.GetBytes(
@@ -47,7 +61,6 @@ builder.Services.AddAuthentication(
     });
 
 builder.Services.AddEndpointsApiExplorer();
-// Cấu hình Swagger hỗ trợ nhập Token JWT Bearer
 builder.Services.AddSwaggerGen(options =>
 {
     options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
@@ -57,7 +70,7 @@ builder.Services.AddSwaggerGen(options =>
         Scheme = "Bearer",
         BearerFormat = "JWT",
         In = Microsoft.OpenApi.Models.ParameterLocation.Header,
-        Description = "Nhập token của bạn theo cú pháp: Bearer [chuỗi_token_của_bạn]"
+        Description = "Enter token as: Bearer {your_token}"
     });
 
     options.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
@@ -71,39 +84,56 @@ builder.Services.AddSwaggerGen(options =>
                     Id = "Bearer"
                 }
             },
-            new string[] {}
+            Array.Empty<string>()
         }
     });
 });
 
-builder.Services.AddHttpClient<
-    IAiService,
-    AiService>(client =>
-    {
-        client.BaseAddress =
-            new Uri(
-                "http://localhost:8000"
-            );
-    });
+builder.Services.AddHttpClient<IAiService, AiService>(client =>
+{
+    client.BaseAddress = new Uri(aiServiceOptions.BaseUrl);
+});
 
-
-
-var myAllowSpecificOrigins = "_myAllowSpecificOrigins";
+const string corsPolicyName = "_myAllowSpecificOrigins";
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: myAllowSpecificOrigins,
-        policy =>
-        {
-                          policy.WithOrigins("http://localhost:5173") 
-                                .AllowAnyHeader()
-                                .AllowAnyMethod()
-                                .AllowCredentials(); // Nếu bạn có dùng Cookie hoặc nhận diện quyền tự động
-        });
+    options.AddPolicy(corsPolicyName, policy =>
+    {
+        policy.WithOrigins(corsOptions.AllowedOrigins.ToArray())
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
+    });
 });
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    var aiService = scope.ServiceProvider.GetRequiredService<IAiService>();
+    var environment = scope.ServiceProvider.GetRequiredService<IWebHostEnvironment>();
+    var logger = scope.ServiceProvider.GetRequiredService<ILoggerFactory>()
+        .CreateLogger("Startup");
+
+    if (databaseOptions.ApplyMigrationsOnStartup)
+    {
+        await context.Database.MigrateAsync();
+    }
+
+    await DatabaseSchemaRepairer.RepairAsync(context);
+
+    if (databaseOptions.SeedOnStartup)
+    {
+        await DatabaseSeeder.SeedAsync(context, aiService);
+    }
+
+    await LegacyTrainingDataImporter.ImportAsync(
+        context,
+        environment.ContentRootPath,
+        logger);
+}
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -111,12 +141,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-app.UseCors("_myAllowSpecificOrigins");
-
+app.UseCors(corsPolicyName);
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

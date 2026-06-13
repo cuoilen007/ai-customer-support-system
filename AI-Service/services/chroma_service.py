@@ -14,7 +14,8 @@ class ChromaService:
     @staticmethod
     def add_document(
         document_id: str,
-        content: str
+        content: str,
+        metadata: dict | None = None
     ):
 
         embedding = \
@@ -22,14 +23,18 @@ class ChromaService:
                 content
             )
 
-        collection.add(
+        collection.upsert(
             ids=[document_id],
             documents=[content],
-            embeddings=[embedding]
+            embeddings=[embedding],
+            metadatas=[metadata or ChromaService._build_metadata(document_id)]
         )
 
     @staticmethod
-    def search(question: str):
+    def search(
+        question: str,
+        n_results: int = 5
+    ):
 
         embedding = \
             EmbeddingService.create_embedding(
@@ -38,7 +43,12 @@ class ChromaService:
 
         result = collection.query(
             query_embeddings=[embedding],
-            n_results=3
+            n_results=n_results,
+            include=[
+                "documents",
+                "metadatas",
+                "distances"
+            ]
         )
 
         return result
@@ -58,3 +68,21 @@ class ChromaService:
         collection.delete(
             ids=[document_id]
         )
+
+    @staticmethod
+    def _build_metadata(
+        document_id: str
+    ):
+
+        source_type = "document"
+
+        if document_id.startswith("product-"):
+            source_type = "product"
+
+        if document_id.startswith("support-policy-"):
+            source_type = "support_policy"
+
+        return {
+            "source_id": document_id,
+            "source_type": source_type
+        }

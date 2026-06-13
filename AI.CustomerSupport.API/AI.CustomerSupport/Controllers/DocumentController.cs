@@ -1,9 +1,9 @@
-﻿using AI.CustomerSupport.API.Data;
+using AI.CustomerSupport.API.Data;
 using AI.CustomerSupport.API.DTOs.Document;
+using AI.CustomerSupport.API.Helpers;
 using AI.CustomerSupport.API.Models;
 using AI.CustomerSupport.API.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,8 +18,8 @@ namespace AI.CustomerSupport.API.Controllers
         private readonly IAiService _aiService;
 
         public DocumentController(
-         AppDbContext context,
-         IAiService aiService)
+            AppDbContext context,
+            IAiService aiService)
         {
             _context = context;
             _aiService = aiService;
@@ -50,8 +50,7 @@ namespace AI.CustomerSupport.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(
-            CreateDocumentRequest request)
+        public async Task<IActionResult> Create(CreateDocumentRequest request)
         {
             var document = new Document
             {
@@ -64,9 +63,8 @@ namespace AI.CustomerSupport.API.Controllers
 
             await _context.SaveChangesAsync();
             await _aiService.AddDocumentAsync(
-                document.Id.ToString(),
-                document.Content
-            );
+                KnowledgeContentBuilder.GetDocumentVectorId(document.Id),
+                KnowledgeContentBuilder.BuildDocumentContent(document));
 
             return Ok(document);
         }
@@ -89,13 +87,11 @@ namespace AI.CustomerSupport.API.Controllers
 
             await _context.SaveChangesAsync();
             await _aiService.DeleteDocumentAsync(
-                document.Id.ToString()
-            );
+                KnowledgeContentBuilder.GetDocumentVectorId(document.Id));
 
             await _aiService.AddDocumentAsync(
-                document.Id.ToString(),
-                document.Content
-            );
+                KnowledgeContentBuilder.GetDocumentVectorId(document.Id),
+                KnowledgeContentBuilder.BuildDocumentContent(document));
 
             return Ok(document);
         }
@@ -115,8 +111,7 @@ namespace AI.CustomerSupport.API.Controllers
 
             await _context.SaveChangesAsync();
             await _aiService.DeleteDocumentAsync(
-                 document.Id.ToString()
-             );
+                KnowledgeContentBuilder.GetDocumentVectorId(document.Id));
 
             return NoContent();
         }

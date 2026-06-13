@@ -69,11 +69,11 @@ export default function LoginPage() {
 
                 <input
                     className="
-border
-w-full
-p-2
-mb-3
-"
+                    border
+                    w-full
+                    p-2
+                    mb-3
+                    "
                     placeholder="Email"
                     value={email}
                     onChange={
@@ -86,11 +86,11 @@ mb-3
                 <input
                     type="password"
                     className="
-border
-w-full
-p-2
-mb-3
-"
+                        border
+                        w-full
+                        p-2
+                        mb-3
+                        "
                     placeholder="Password"
                     value={password}
                     onChange={
@@ -105,11 +105,11 @@ mb-3
                         handleLogin
                     }
                     className="
-bg-blue-500
-text-white
-w-full
-p-2
-"
+                    bg-blue-500
+                    text-white
+                    w-full
+                    p-2
+                    "
                 >
                     Login
                 </button>

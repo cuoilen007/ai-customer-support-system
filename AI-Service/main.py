@@ -13,6 +13,13 @@ from classifier import (
     predict_category
 )
 
+from services.evaluation_service import (
+    EvaluationService
+)
+from services.training_service import (
+    TrainingService
+)
+
 app = FastAPI(
     title="AI Customer Support",
     version="1.0"
@@ -28,6 +35,7 @@ class InsertDocumentRequest(
 ):
     document_id: str
     content: str
+    metadata: dict | None = None
 
 
 class SearchRequest(
@@ -45,6 +53,30 @@ class ClassificationRequest(
     BaseModel
 ):
     text: str
+
+
+class EvaluationRequest(
+    BaseModel
+):
+    question: str
+    answer: str
+    context: str = ""
+    category: str = ""
+
+
+class TrainingExampleRequest(
+    BaseModel
+):
+    input: str
+    output: str = ""
+    category: str
+    intent: str = ""
+
+
+class TrainingRunRequest(
+    BaseModel
+):
+    examples: list[TrainingExampleRequest]
 
 
 # ===================================
@@ -79,7 +111,8 @@ def insert_document(
 
     ChromaService.add_document(
         request.document_id,
-        request.content
+        request.content,
+        request.metadata
     )
 
     return {
@@ -166,3 +199,32 @@ def classify(
         "category":
         category
     }
+
+
+@app.post(
+    "/evaluate"
+)
+def evaluate(
+    request:
+    EvaluationRequest
+):
+    return EvaluationService.evaluate(
+        request.question,
+        request.answer,
+        request.context,
+        request.category
+    )
+
+
+@app.get("/training/status")
+def training_status():
+    return TrainingService.get_status()
+
+
+@app.post("/training/run")
+def run_training(
+    request: TrainingRunRequest
+):
+    return TrainingService.start_training(
+        [example.model_dump() for example in request.examples]
+    )

@@ -23,7 +23,8 @@ namespace AI.CustomerSupport.API.Services
                 new
                 {
                     document_id = documentId,
-                    content = content
+                    content = content,
+                    metadata = BuildMetadata(documentId)
                 });
         }
 
@@ -80,6 +81,38 @@ namespace AI.CustomerSupport.API.Services
             }
         }
 
+        public async Task<AiEvaluationResponse?> EvaluateAsync(
+            string question,
+            string answer,
+            string context,
+            string category
+        )
+        {
+            try
+            {
+                var response =
+                    await _httpClient.PostAsJsonAsync(
+                        "/evaluate",
+                        new
+                        {
+                            question,
+                            answer,
+                            context,
+                            category
+                        });
+
+                response.EnsureSuccessStatusCode();
+
+                return await response
+                    .Content
+                    .ReadFromJsonAsync<AiEvaluationResponse>();
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         public async Task<string> ClassifyAsync(string text)
         {
             var response =
@@ -95,6 +128,68 @@ namespace AI.CustomerSupport.API.Services
                          .ReadFromJsonAsync<ClassificationResponse>();
 
             return result!.Category;
+        }
+
+        public async Task<AiTrainingStatusResponse?> GetTrainingStatusAsync()
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync("/training/status");
+                response.EnsureSuccessStatusCode();
+
+                return await response.Content
+                    .ReadFromJsonAsync<AiTrainingStatusResponse>();
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public async Task<AiTrainingStatusResponse?> RunTrainingAsync(
+            AiTrainingRunRequest request)
+        {
+            try
+            {
+                var response = await _httpClient.PostAsJsonAsync(
+                    "/training/run",
+                    request);
+
+                response.EnsureSuccessStatusCode();
+
+                return await response.Content
+                    .ReadFromJsonAsync<AiTrainingStatusResponse>();
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        private static object BuildMetadata(
+            string documentId)
+        {
+            var sourceType = "document";
+
+            if (documentId.StartsWith(
+                "product-",
+                StringComparison.OrdinalIgnoreCase))
+            {
+                sourceType = "product";
+            }
+
+            if (documentId.StartsWith(
+                "support-policy-",
+                StringComparison.OrdinalIgnoreCase))
+            {
+                sourceType = "support_policy";
+            }
+
+            return new
+            {
+                source_id = documentId,
+                source_type = sourceType
+            };
         }
     }
 }

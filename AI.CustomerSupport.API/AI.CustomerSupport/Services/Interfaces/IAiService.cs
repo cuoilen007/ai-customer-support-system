@@ -15,11 +15,24 @@ namespace AI.CustomerSupport.API.Services.Interfaces
 
         Task<RagResponse> AskAsync(string question);
 
+        Task<AiEvaluationResponse?> EvaluateAsync(
+            string question,
+            string answer,
+            string context,
+            string category
+        );
+
 
         Task<bool> IsAiAliveAsync();
 
         Task<string> ClassifyAsync(
             string text
+        );
+
+        Task<AiTrainingStatusResponse?> GetTrainingStatusAsync();
+
+        Task<AiTrainingStatusResponse?> RunTrainingAsync(
+            AiTrainingRunRequest request
         );
     }
 }

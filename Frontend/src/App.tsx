@@ -16,6 +16,9 @@ import PublicRoute from "./routes/PublicRoute";
 
 import MainLayout from "./components/layout/MainLayout";
 
+import DashboardPage from "./pages/DashboardPage";
+import AiReviewPage from "./pages/AiReviewPage";
+
 function App() {
 
   return (
@@ -24,14 +27,7 @@ function App() {
 
       <Routes>
 
-        <Route
-          path="/"
-          element={
-            <Navigate
-              to="/chat"
-              replace
-            />
-          }
+        <Route path="/" element={ <Navigate  to="/chat" replace /> }
         />
 
         <Route
@@ -68,6 +64,16 @@ function App() {
           <Route
             path="/knowledge-base"
             element={<KnowledgeBasePage />}
+          />
+          
+          <Route
+            path="/dashboard"
+            element={<DashboardPage />}
+          />
+
+          <Route
+            path="/ai-review"
+            element={<AiReviewPage />}
           />
 
         </Route>
