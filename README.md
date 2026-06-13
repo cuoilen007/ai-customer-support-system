@@ -133,7 +133,6 @@ AI-Service/                       FastAPI AI service + ChromaDB + training pipel
 
 ## Screenshots
 
-
 ### Chat workspace
 ![Chat workspace](docs/screenshots/chat-page.png)
 
@@ -145,7 +144,6 @@ AI-Service/                       FastAPI AI service + ChromaDB + training pipel
 
 ### Knowledge base management
 ![Knowledge base management](docs/screenshots/knowledge-base.png)
-
 
 ## AI workflow
 
@@ -228,9 +226,9 @@ npm install
 npm run dev
 ```
 
-## What a recruiter should look at
+## Key files
 
-If you are reviewing this project for engineering ability, the most representative parts are:
+These files show the core product thinking:
 
 - `AI.CustomerSupport.API/AI.CustomerSupport/Controllers/ChatController.cs`
 - `AI.CustomerSupport.API/AI.CustomerSupport/Controllers/ChatEvaluationController.cs`
@@ -240,8 +238,6 @@ If you are reviewing this project for engineering ability, the most representati
 - `Frontend/src/pages/DashboardPage.tsx`
 - `AI-Service/services/training_service.py`
 - `AI-Service/services/rag_service.py`
-
-These areas show the core product thinking: retrieval, evaluation, review workflows, knowledge updates, analytics, and model retraining.
 
 ## CV / portfolio project entry
 
