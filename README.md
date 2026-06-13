@@ -130,6 +130,7 @@ AI.CustomerSupport.API/           ASP.NET Core API + EF Core + SQL Server
 AI-Service/                       FastAPI AI service + ChromaDB + training pipeline
 ```
 
+
 ## Screenshots
 
 Add 3-5 screenshots to help recruiters understand the project in under a minute. A good set would be:
@@ -151,11 +152,6 @@ docs/
     knowledge-base.png
 ```
 
-Example section:
-
-```md
-## Screenshots
-
 ### Chat workspace
 ![Chat workspace](docs/screenshots/chat-page.png)
 
@@ -167,7 +163,6 @@ Example section:
 
 ### Knowledge base management
 ![Knowledge base management](docs/screenshots/knowledge-base.png)
-```
 
 Tip: use screenshots with real seeded data so the reviewer immediately sees products, policies, review groups, analytics, and training history in action.
 
