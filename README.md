@@ -133,24 +133,6 @@ AI-Service/                       FastAPI AI service + ChromaDB + training pipel
 
 ## Screenshots
 
-Add 3-5 screenshots to help recruiters understand the project in under a minute. A good set would be:
-
-- chat workspace
-- AI review workspace
-- training set and training run history
-- dashboard analytics
-- knowledge base management
-
-Suggested structure:
-
-```text
-docs/
-  screenshots/
-    chat-page.png
-    ai-review.png
-    dashboard.png
-    knowledge-base.png
-```
 
 ### Chat workspace
 ![Chat workspace](docs/screenshots/chat-page.png)
